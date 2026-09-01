@@ -6,10 +6,12 @@ export default function FloatingWhatsApp() {
 
   return (
     <div
+      id="wa-floating-container"
+      className="wa-floating-container"
       style={{
         position: 'fixed',
-        bottom: '28px',
-        right: '28px',
+        bottom: '24px',
+        right: '24px',
         zIndex: 9950,
         display: 'flex',
         alignItems: 'center',
@@ -122,12 +124,24 @@ export default function FloatingWhatsApp() {
           50% { opacity: 0.4; transform: scale(0.7); }
         }
 
-        @media (max-width: 640px) {
-          .wa-live-text {
-            display: none;
-          }
+        /* Responsive adjustments - Hide pill badge on tablet & mobile, keep clean circle */
+        @media (max-width: 768px) {
           .wa-live-badge {
-            padding: 8px;
+            display: none !important;
+          }
+          .whatsapp-pulse {
+            width: 52px !important;
+            height: 52px !important;
+          }
+          .whatsapp-pulse svg {
+            width: 28px !important;
+            height: 28px !important;
+          }
+        }
+        @media (max-width: 480px) {
+          #wa-floating-container {
+            bottom: 18px !important;
+            right: 16px !important;
           }
         }
       `}</style>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Sun, Moon, Menu, X, ArrowUpRight } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Sun, Moon, ArrowUpRight } from 'lucide-react';
 
 export default function Navbar({ theme, toggleTheme, onOpenEnroll }) {
   const [scrolled, setScrolled] = useState(false);
@@ -130,12 +131,14 @@ export default function Navbar({ theme, toggleTheme, onOpenEnroll }) {
             {/* Glowing ring behind logo */}
             <div className="logo-glow-ring" />
           </div>
-          {/* Text beside badge */}
+
+          {/* Text beside badge (Shows on Mobile, Clean on Desktop) */}
           <div className="navbar-brand-text">
-            <span style={{ fontSize: '1.38rem', fontWeight: 800, fontFamily: 'Space Grotesk, Outfit, sans-serif', color: 'var(--text-primary)', whiteSpace: 'nowrap', display: 'block', lineHeight: 1.15, letterSpacing: '-0.01em' }}>
-              Aspire<span style={{ color: '#4CC9F0' }}>Forex</span>
+            <span className="brand-name-top">
+              <span className="brand-aspire">Aspire</span>{' '}
+              <span className="brand-forex">Forex</span>
             </span>
-            <span style={{ fontSize: '0.72rem', letterSpacing: '0.28em', fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase', whiteSpace: 'nowrap', display: 'block', marginTop: '2px' }}>
+            <span className="brand-institute gradient-text">
               Institute
             </span>
           </div>
@@ -224,8 +227,9 @@ export default function Navbar({ theme, toggleTheme, onOpenEnroll }) {
             Join Now <ArrowUpRight size={16} />
           </a>
 
-          {/* Mobile Menu Hamburger */}
-          <button
+          {/* Mobile Menu Hamburger with Smooth 3-Line Animated Morph */}
+          <motion.button
+            whileTap={{ scale: 0.9 }}
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="mobile-toggle"
             aria-label="Toggle Menu"
@@ -233,79 +237,139 @@ export default function Navbar({ theme, toggleTheme, onOpenEnroll }) {
               width: '42px',
               height: '42px',
               borderRadius: '12px',
-              background: 'var(--card-inner-bg)',
-              border: '1px solid var(--card-border)',
-              color: 'var(--text-primary)',
+              background: mobileMenuOpen 
+                ? (theme === 'dark' ? 'rgba(76, 201, 240, 0.16)' : 'rgba(10, 132, 255, 0.14)')
+                : 'var(--card-inner-bg)',
+              border: mobileMenuOpen 
+                ? (theme === 'dark' ? '1.5px solid rgba(76, 201, 240, 0.5)' : '1.5px solid rgba(10, 132, 255, 0.5)')
+                : '1px solid var(--card-border)',
+              color: mobileMenuOpen ? 'var(--accent-secondary)' : 'var(--text-primary)',
               alignItems: 'center',
               justifyContent: 'center',
               cursor: 'pointer',
-              transition: 'all 0.2s ease'
+              boxShadow: mobileMenuOpen ? '0 0 14px var(--accent-glow)' : 'none',
+              transition: 'background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease',
+              position: 'relative',
+              overflow: 'hidden'
             }}
           >
-            {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
-          </button>
+            <div style={{ width: '20px', height: '15px', position: 'relative', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+              <span
+                style={{
+                  display: 'block',
+                  width: '100%',
+                  height: '2.5px',
+                  borderRadius: '3px',
+                  backgroundColor: 'currentColor',
+                  transformOrigin: 'left center',
+                  transform: mobileMenuOpen ? 'rotate(45deg) translate(1px, -2px)' : 'none',
+                  transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)'
+                }}
+              />
+              <span
+                style={{
+                  display: 'block',
+                  width: '100%',
+                  height: '2.5px',
+                  borderRadius: '3px',
+                  backgroundColor: 'currentColor',
+                  opacity: mobileMenuOpen ? 0 : 1,
+                  transform: mobileMenuOpen ? 'translateX(10px) scaleX(0)' : 'none',
+                  transition: 'all 0.25s cubic-bezier(0.16, 1, 0.3, 1)'
+                }}
+              />
+              <span
+                style={{
+                  display: 'block',
+                  width: '100%',
+                  height: '2.5px',
+                  borderRadius: '3px',
+                  backgroundColor: 'currentColor',
+                  transformOrigin: 'left center',
+                  transform: mobileMenuOpen ? 'rotate(-45deg) translate(1px, 2px)' : 'none',
+                  transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)'
+                }}
+              />
+            </div>
+          </motion.button>
         </div>
       </div>
 
-      {/* Mobile Slide-Down Dropdown Menu */}
-      {mobileMenuOpen && (
-        <div
-          style={{
-            marginTop: '8px',
-            background: 'var(--nav-bg)',
-            backdropFilter: 'blur(24px)',
-            WebkitBackdropFilter: 'blur(24px)',
-            border: '1px solid var(--card-border)',
-            borderRadius: '20px',
-            padding: '20px',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '8px',
-            boxShadow: 'var(--shadow-glass)'
-          }}
-        >
-          {navLinks.map((link) => {
-            const isActive = activeLink === link.href;
-            return (
-              <a
-                key={link.name}
-                href={link.href}
-                onClick={() => {
-                  handleNavClick(link.href);
-                  setMobileMenuOpen(false);
-                }}
-                style={{
-                  padding: '12px 16px',
-                  borderRadius: '12px',
-                  background: isActive ? 'var(--card-inner-bg)' : 'transparent',
-                  color: isActive ? 'var(--accent-secondary)' : 'var(--text-primary)',
-                  fontWeight: isActive ? 700 : 500,
-                  fontSize: '0.95rem',
-                  textDecoration: 'none',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between'
-                }}
-              >
-                <span>{link.name}</span>
-                {isActive && (
-                  <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#4CC9F0', boxShadow: '0 0 8px #4CC9F0' }} />
-                )}
-              </a>
-            );
-          })}
-          <a
-            href="https://wa.me/923134494554?text=Hello%20Aspire%20Forex%20Institute,%20I%20want%20to%20Join."
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => setMobileMenuOpen(false)}
-            className="btn-primary"
-            style={{ width: '100%', marginTop: '12px', padding: '13px', textDecoration: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}
+      {/* Mobile Slide-Down Dropdown Menu with Spring Entrance & Exit */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -14, scale: 0.97 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -12, scale: 0.97 }}
+            transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+            style={{
+              marginTop: '10px',
+              background: theme === 'dark' ? 'rgba(11, 17, 32, 0.96)' : 'rgba(255, 255, 255, 0.97)',
+              backdropFilter: 'blur(28px)',
+              WebkitBackdropFilter: 'blur(28px)',
+              border: '1.5px solid var(--card-border-glow)',
+              borderRadius: '22px',
+              padding: '18px 16px',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '6px',
+              boxShadow: '0 20px 45px rgba(0, 0, 0, 0.35)'
+            }}
           >
-            Join Now <ArrowUpRight size={16} />
-          </a>
-        </div>
-      )}
+            {navLinks.map((link, idx) => {
+              const isActive = activeLink === link.href;
+              return (
+                <motion.a
+                  key={link.name}
+                  href={link.href}
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: idx * 0.035, duration: 0.25 }}
+                  onClick={() => {
+                    handleNavClick(link.href);
+                    setMobileMenuOpen(false);
+                  }}
+                  whileTap={{ scale: 0.97 }}
+                  style={{
+                    padding: '12px 16px',
+                    borderRadius: '14px',
+                    background: isActive ? 'var(--card-inner-bg)' : 'transparent',
+                    border: isActive ? '1px solid var(--card-border)' : '1px solid transparent',
+                    color: isActive ? 'var(--accent-secondary)' : 'var(--text-primary)',
+                    fontWeight: isActive ? 800 : 600,
+                    fontSize: '0.96rem',
+                    textDecoration: 'none',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    transition: 'background 0.2s ease, color 0.2s ease'
+                  }}
+                >
+                  <span>{link.name}</span>
+                  {isActive && (
+                    <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#4CC9F0', boxShadow: '0 0 10px #4CC9F0' }} />
+                  )}
+                </motion.a>
+              );
+            })}
+            <motion.a
+              href="https://wa.me/923134494554?text=Hello%20Aspire%20Forex%20Institute,%20I%20want%20to%20Join."
+              target="_blank"
+              rel="noopener noreferrer"
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: navLinks.length * 0.035 + 0.05, duration: 0.25 }}
+              whileTap={{ scale: 0.97 }}
+              onClick={() => setMobileMenuOpen(false)}
+              className="btn-primary"
+              style={{ width: '100%', marginTop: '10px', padding: '13px', textDecoration: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', borderRadius: '14px' }}
+            >
+              Join Now <ArrowUpRight size={16} />
+            </motion.a>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Responsive Breakpoint Styles */}
       <style>{`
@@ -354,43 +418,90 @@ export default function Navbar({ theme, toggleTheme, onOpenEnroll }) {
           transition: transform 0.4s ease, filter 0.4s ease;
         }
 
-        /* Logo sizing — default (desktop) */
-        .navbar-logo { height: 78px !important; width: 78px !important; }
-        .logo-glow-ring { width: 96px; height: 96px; }
-        .navbar-brand-text { display: flex; flex-direction: column; }
+        /* Brand Name Text Styling */
+        .navbar-brand-text {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          line-height: 1.15;
+          text-align: left;
+        }
+
+        .brand-name-top {
+          font-size: 1.08rem;
+          font-weight: 800;
+          font-family: 'Space Grotesk', 'Outfit', sans-serif;
+          letter-spacing: -0.02em;
+          line-height: 1.1;
+          display: flex;
+          align-items: baseline;
+        }
+
+        .brand-aspire {
+          color: var(--text-primary);
+        }
+
+        .brand-forex {
+          color: #0A84FF;
+          margin-left: 4px;
+        }
+
+        :root[data-theme="dark"] .brand-forex {
+          color: #4CC9F0;
+        }
+
+        .brand-institute {
+          font-size: 0.92rem;
+          font-weight: 800;
+          font-family: 'Space Grotesk', 'Outfit', sans-serif;
+          letter-spacing: -0.01em;
+          line-height: 1.15;
+          display: block;
+        }
 
         /* Tiny mobile ≤ 480px */
         @media (max-width: 480px) {
-          .navbar-logo { height: 50px !important; width: 50px !important; }
-          .logo-glow-ring { width: 62px; height: 62px; }
-          .navbar-brand-text { display: none !important; }
+          .navbar-logo { height: 48px !important; width: 48px !important; }
+          .logo-glow-ring { width: 58px; height: 58px; }
+          .navbar-brand-text { display: flex !important; }
+          .brand-name-top { font-size: 0.98rem !important; }
+          .brand-institute { font-size: 0.85rem !important; }
           .enroll-btn-nav { display: none !important; }
         }
+
         /* Small mobile 481–767px */
         @media (min-width: 481px) and (max-width: 767px) {
-          .navbar-logo { height: 56px !important; width: 56px !important; }
-          .logo-glow-ring { width: 68px; height: 68px; }
-          .navbar-brand-text { display: none !important; }
+          .navbar-logo { height: 54px !important; width: 54px !important; }
+          .logo-glow-ring { width: 66px; height: 66px; }
+          .navbar-brand-text { display: flex !important; }
+          .brand-name-top { font-size: 1.08rem !important; }
+          .brand-institute { font-size: 0.92rem !important; }
           .enroll-btn-nav { display: none !important; }
         }
+
         /* Tablet 768–1240px */
         @media (min-width: 768px) and (max-width: 1240px) {
-          .navbar-logo { height: 68px !important; width: 68px !important; }
-          .logo-glow-ring { width: 84px; height: 84px; }
+          .navbar-logo { height: 62px !important; width: 62px !important; }
+          .logo-glow-ring { width: 76px; height: 76px; }
+          .navbar-brand-text { display: flex !important; }
           .enroll-btn-nav { display: inline-flex !important; }
         }
+
         /* Hide desktop nav on tablet/mobile */
         @media (max-width: 1240px) {
           .desktop-nav { display: none !important; }
           .mobile-toggle { display: flex !important; }
         }
-        /* Desktop 1241px+ */
+
+        /* Desktop 1241px+ (PC Version: Clean layout without mobile brand text) */
         @media (min-width: 1241px) {
+          .navbar-brand-text { display: none !important; }
           .mobile-toggle { display: none !important; }
           .navbar-logo { height: 78px !important; width: 78px !important; }
           .logo-glow-ring { width: 96px; height: 96px; }
           .enroll-btn-nav { display: inline-flex !important; }
         }
+
         /* Large desktop 1380px+ */
         @media (min-width: 1380px) {
           .desktop-nav { gap: 22px !important; }

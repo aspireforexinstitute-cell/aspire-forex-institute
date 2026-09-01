@@ -32,7 +32,7 @@ export default function Footer({ theme = 'dark' }) {
       }}
     >
       <div className="container-custom">
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '48px', marginBottom: '60px' }}>
+        <div className="footer-grid">
           
           {/* Col 1: Institute Branding */}
           <div>

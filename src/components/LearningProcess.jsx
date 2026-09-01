@@ -67,7 +67,7 @@ export default function LearningProcess() {
         </div>
 
         {/* 5-Step Process Timeline Cards with Individual Staggered Scroll Motion */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '24px', position: 'relative' }}>
+        <div className="process-grid" style={{ position: 'relative' }}>
           {steps.map((step, idx) => {
             const Icon = step.icon;
             return (
@@ -82,9 +82,9 @@ export default function LearningProcess() {
                   ease: [0.16, 1, 0.3, 1]
                 }}
                 whileHover={{ y: -6, transition: { duration: 0.2 } }}
-                className="glass-card"
+                className="glass-card process-step-card"
                 style={{
-                  padding: '36px 24px',
+                  padding: '36px 22px',
                   display: 'flex',
                   flexDirection: 'column',
                   alignItems: 'center',
@@ -96,8 +96,8 @@ export default function LearningProcess() {
                 {/* Step Circle Badge - High Contrast 3D Gradient */}
                 <div
                   style={{
-                    width: '68px',
-                    height: '68px',
+                    width: '60px',
+                    height: '60px',
                     borderRadius: '50%',
                     background: step.gradient,
                     border: '2px solid rgba(255, 255, 255, 0.3)',
@@ -105,12 +105,12 @@ export default function LearningProcess() {
                     alignItems: 'center',
                     justifyContent: 'center',
                     color: '#FFFFFF',
-                    marginBottom: '20px',
+                    marginBottom: '18px',
                     boxShadow: `0 10px 24px -3px ${step.glow}, inset 0 2px 4px rgba(255, 255, 255, 0.35)`,
                     flexShrink: 0
                   }}
                 >
-                  <Icon size={28} strokeWidth={2.4} style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.25))' }} />
+                  <Icon size={26} strokeWidth={2.4} style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.25))' }} />
                 </div>
 
                 {/* Step Number */}
@@ -128,12 +128,12 @@ export default function LearningProcess() {
                 </span>
 
                 {/* Title */}
-                <h3 style={{ fontSize: '1.22rem', fontWeight: 800, marginBottom: '12px', color: 'var(--text-primary)', fontFamily: 'Outfit, Space Grotesk, sans-serif' }}>
+                <h3 style={{ fontSize: '1.22rem', fontWeight: 800, marginBottom: '10px', color: 'var(--text-primary)', fontFamily: 'Outfit, Space Grotesk, sans-serif' }}>
                   {step.title}
                 </h3>
 
                 {/* Description */}
-                <p style={{ fontSize: '1rem', color: 'var(--text-muted)', lineHeight: 1.72 }}>
+                <p style={{ fontSize: '0.98rem', color: 'var(--text-muted)', lineHeight: 1.7 }}>
                   {step.desc}
                 </p>
 
@@ -143,6 +143,15 @@ export default function LearningProcess() {
         </div>
 
       </div>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .process-step-card {
+            padding: 24px 18px !important;
+            border-radius: 18px !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }

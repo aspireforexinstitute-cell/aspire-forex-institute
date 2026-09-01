@@ -72,9 +72,14 @@ body {
   font-weight: 500;
 }
 
-html, body, #root {
+html, body, #root, #main-content, section {
   overflow-x: hidden;
-  max-width: 100vw;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+img, svg, iframe, canvas {
+  max-width: 100%;
 }
 
 /* Silky-Smooth Theme Transition on Mode Switch */
@@ -274,6 +279,96 @@ p {
   color: #0F172A;
 }
 
+/* Tactile Active Press Feedback for Primary & Secondary Buttons */
+.btn-primary:active {
+  transform: translateY(1px) scale(0.96) !important;
+  box-shadow: 0 4px 14px -2px var(--accent-glow) !important;
+  filter: brightness(1.05) !important;
+  transition: transform 0.12s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.12s ease !important;
+}
+
+.btn-secondary:active {
+  transform: translateY(1px) scale(0.96) !important;
+  background: rgba(255, 255, 255, 0.16) !important;
+  transition: transform 0.12s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+:root[data-theme="light"] .btn-secondary:active {
+  background: rgba(15, 23, 42, 0.14) !important;
+}
+
+/* Icon subtle motion inside buttons on hover/active */
+.btn-primary svg,
+.btn-secondary svg {
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.btn-primary:hover svg {
+  transform: translateX(4px);
+}
+
+.btn-primary:active svg {
+  transform: translateX(1px);
+}
+
+/* Universal Button Click Feedback */
+button:not(:disabled):active {
+  transform: scale(0.95);
+  transition: transform 0.12s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Tab buttons & Filter pills active bounce */
+.market-tab-btn,
+.enroll-btn-nav,
+.theme-toggle-btn,
+.calendar-refresh-btn,
+.filter-group button {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.market-tab-btn:hover {
+  transform: translateY(-2px);
+}
+
+.market-tab-btn:active {
+  transform: scale(0.95) !important;
+}
+
+.calendar-refresh-btn:hover svg {
+  transform: rotate(45deg);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.calendar-refresh-btn:active {
+  transform: scale(0.92) !important;
+}
+
+/* Theme Toggle Button smooth rotation & bounce */
+.theme-toggle-btn {
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.3s ease !important;
+}
+
+.theme-toggle-btn:hover {
+  transform: rotate(15deg) scale(1.08) !important;
+}
+
+.theme-toggle-btn:active {
+  transform: rotate(-15deg) scale(0.92) !important;
+}
+
+/* Navigation Links Smooth Hover & Active Feedback */
+.nav-link-item {
+  transition: color 0.25s ease, transform 0.2s ease;
+}
+
+.nav-link-item:hover {
+  transform: translateY(-1px);
+}
+
+.nav-link-item:active {
+  transform: scale(0.94);
+}
+
 /* Badges */
 .badge-pill {
   display: inline-flex;
@@ -460,7 +555,7 @@ textarea:focus-visible {
   color: #0F172A;
 }
 
-/* Base media safety */
+/* Base media safety & containment */
 img, video, svg, canvas, iframe {
   max-width: 100%;
   height: auto;
@@ -485,41 +580,93 @@ img, video, svg, canvas, iframe {
   }
 }
 
-/* About grid */
-.about-grid {
+/* Hero Terminal & Stats Card */
+.hero-terminal-card {
+  padding: 28px;
+  position: relative;
+  border-radius: 24px;
+  background: linear-gradient(135deg, #0D1327 0%, #050816 100%);
+  border: 1px solid rgba(76, 201, 240, 0.35);
+  box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.65);
+  color: #FFFFFF;
+}
+
+.hero-stats-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 36px;
-  align-items: start;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
 }
 
-@media (min-width: 1024px) {
-  .about-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 48px;
-  }
-}
-
-/* Contact grid */
-.contact-grid {
+/* Trust Stats Grid */
+.trust-stats-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 32px;
-  align-items: start;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
 }
 
-@media (min-width: 1024px) {
-  .contact-grid {
-    grid-template-columns: 5fr 7fr;
-    gap: 40px;
-  }
+/* 5-Step Process Roadmap Grid */
+.process-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+}
+
+/* Why Choose Us Grid */
+.why-us-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+/* Live Market Watchlist Grid */
+.watchlist-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+/* Contact Form Grid */
+.contact-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* Footer Grid */
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1.2fr 1.4fr 1.6fr;
+  gap: 48px;
+  margin-bottom: 60px;
 }
 
 /* =====================================================================
-   MOBILE & TABLET ADAPTATIONS (Auto Adjust without breaking PC layout)
+   RESPONSIVE BREAKPOINTS (Desktop -> Tablet -> Mobile)
    ===================================================================== */
 
-/* Tablet & Mobile (≤ 1023px) */
+/* Large Desktop (1400px+) */
+@media (min-width: 1400px) {
+  .process-grid {
+    gap: 24px;
+  }
+}
+
+/* Desktop & Laptop (1024px – 1399px) */
+@media (max-width: 1399px) and (min-width: 1024px) {
+  .process-grid {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 14px;
+  }
+  .process-grid .glass-card {
+    padding: 28px 16px !important;
+  }
+  .footer-grid {
+    grid-template-columns: 1.8fr 1.1fr 1.3fr 1.5fr;
+    gap: 32px;
+  }
+}
+
+/* Tablet (768px – 1023px) */
 @media (max-width: 1023px) {
   .float-element,
   .float-element-delayed {
@@ -527,25 +674,50 @@ img, video, svg, canvas, iframe {
   }
 
   section {
-    padding-top: 70px !important;
-    padding-bottom: 70px !important;
+    padding-top: 75px !important;
+    padding-bottom: 75px !important;
+  }
+
+  .trust-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+
+  .process-grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+  }
+
+  .why-us-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+  }
+
+  .watchlist-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 36px;
   }
 }
 
-/* Small Mobile (≤ 767px) */
+/* Mobile Devices (≤ 767px) */
 @media (max-width: 767px) {
   .container-custom {
-    padding: 0 18px !important;
+    padding: 0 16px !important;
   }
 
   section {
-    padding-top: 56px !important;
-    padding-bottom: 56px !important;
+    padding-top: 60px !important;
+    padding-bottom: 60px !important;
   }
 
   #home {
-    padding-top: 130px !important;
-    padding-bottom: 50px !important;
+    padding-top: 125px !important;
+    padding-bottom: 40px !important;
   }
 
   .glass-card,
@@ -554,26 +726,68 @@ img, video, svg, canvas, iframe {
     border-radius: 18px !important;
   }
 
+  .hero-terminal-card {
+    padding: 18px 14px !important;
+    border-radius: 18px !important;
+  }
+
   .btn-primary,
   .btn-secondary {
-    width: 100%;
-    padding: 13px 20px;
-    justify-content: center;
+    padding: 13px 22px;
   }
 
   .section-header {
-    margin-bottom: 36px;
+    margin-bottom: 32px;
   }
 
   .section-header h2 {
-    font-size: 1.85rem !important;
+    font-size: clamp(1.75rem, 6.2vw, 2.25rem) !important;
+    word-break: break-word;
   }
 
-  /* Clear, highly readable text on mobile */
-  p, li, span, input, select, textarea {
-    font-size: 1rem;
-    line-height: 1.7;
-    font-weight: 500;
+  .section-header p {
+    font-size: 0.95rem !important;
+    line-height: 1.65 !important;
+  }
+
+  /* 2x2 Clean Dashboard Grid for Trust Section on Mobile */
+  .trust-stats-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px !important;
+  }
+
+  .process-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  .why-us-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  .watchlist-grid {
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+  }
+
+  .contact-form-row {
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+    margin-bottom: 36px !important;
+  }
+
+  /* Prevent iOS Safari input zoom by ensuring minimum 16px font size */
+  .glass-input,
+  input,
+  select,
+  textarea {
+    font-size: 16px !important;
   }
 
   /* Modal bottom sheet on mobile */
@@ -586,33 +800,47 @@ img, video, svg, canvas, iframe {
     border-radius: 20px 20px 0 0 !important;
     max-height: 92vh !important;
     overflow-y: auto;
+    padding: 24px 18px !important;
   }
 }
 
-/* Tiny Mobile (≤ 480px) */
-@media (max-width: 480px) {
+/* Compact Mobile (≤ 520px) */
+@media (max-width: 520px) {
   .container-custom {
     padding: 0 14px !important;
   }
 
-  .section-header h2 {
-    font-size: 1.65rem !important;
+  .trust-stats-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
   }
 
-  .section-header p {
-    font-size: 0.98rem !important;
-    font-weight: 500 !important;
-  }
-
-  p {
-    font-size: 0.98rem !important;
-    line-height: 1.68 !important;
-    font-weight: 500 !important;
+  .hero-stats-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 6px !important;
   }
 
   .badge-pill {
-    font-size: 0.72rem;
-    padding: 6px 12px;
+    font-size: 0.72rem !important;
+    padding: 5px 12px !important;
+    letter-spacing: 0.08em !important;
   }
 }
+
+/* Ultra-compact screens (≤ 360px) */
+@media (max-width: 360px) {
+  .container-custom {
+    padding: 0 10px !important;
+  }
+
+  .trust-stats-grid {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+
+  .section-header h2 {
+    font-size: 1.6rem !important;
+  }
+}
+
 

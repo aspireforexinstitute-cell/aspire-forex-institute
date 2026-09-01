@@ -76,7 +76,7 @@ export default function WhyChooseUs() {
         </div>
 
         {/* 6 Premium Cards Grid with Individual Staggered Scroll Motion */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '28px' }}>
+        <div className="why-us-grid">
           {features.map((item, idx) => {
             const Icon = item.icon;
             return (
@@ -91,9 +91,9 @@ export default function WhyChooseUs() {
                   ease: [0.16, 1, 0.3, 1]
                 }}
                 whileHover={{ y: -6, transition: { duration: 0.2 } }}
-                className="glass-card"
+                className="glass-card why-us-card"
                 style={{
-                  padding: '36px',
+                  padding: '32px 24px',
                   borderTop: `3px solid ${item.color}`,
                   display: 'flex',
                   flexDirection: 'column',
@@ -102,12 +102,12 @@ export default function WhyChooseUs() {
               >
                 <div>
                   {/* Top Badge & Icon */}
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '20px' }}>
                     <div
                       style={{
-                        width: '56px',
-                        height: '56px',
-                        borderRadius: '16px',
+                        width: '52px',
+                        height: '52px',
+                        borderRadius: '14px',
                         background: item.gradient,
                         border: '2px solid rgba(255, 255, 255, 0.3)',
                         display: 'flex',
@@ -117,13 +117,13 @@ export default function WhyChooseUs() {
                         boxShadow: `0 8px 20px -3px ${item.glow}, inset 0 2px 4px rgba(255, 255, 255, 0.35)`
                       }}
                     >
-                      <Icon size={26} strokeWidth={2.4} style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.25))' }} />
+                      <Icon size={24} strokeWidth={2.4} style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.25))' }} />
                     </div>
                     <span
                       style={{
-                        fontSize: '0.76rem',
+                        fontSize: '0.75rem',
                         fontWeight: 800,
-                        padding: '5px 12px',
+                        padding: '4px 10px',
                         borderRadius: '100px',
                         background: 'var(--card-inner-bg)',
                         border: '1px solid var(--card-border)',
@@ -136,12 +136,12 @@ export default function WhyChooseUs() {
                   </div>
 
                   {/* Title */}
-                  <h3 style={{ fontSize: '1.35rem', fontWeight: 800, marginBottom: '14px', lineHeight: 1.3, fontFamily: 'Outfit, Space Grotesk, sans-serif' }}>
+                  <h3 style={{ fontSize: '1.25rem', fontWeight: 800, marginBottom: '12px', lineHeight: 1.3, fontFamily: 'Outfit, Space Grotesk, sans-serif' }}>
                     {item.title}
                   </h3>
 
                   {/* Description */}
-                  <p style={{ color: 'var(--text-muted)', fontSize: '1.02rem', lineHeight: 1.72 }}>
+                  <p style={{ color: 'var(--text-muted)', fontSize: '0.98rem', lineHeight: 1.7 }}>
                     {item.desc}
                   </p>
                 </div>
@@ -153,7 +153,7 @@ export default function WhyChooseUs() {
                     height: '2px',
                     background: `linear-gradient(90deg, transparent, ${item.color}, transparent)`,
                     opacity: 0.5,
-                    marginTop: '24px'
+                    marginTop: '20px'
                   }}
                 />
               </motion.div>
@@ -162,6 +162,15 @@ export default function WhyChooseUs() {
         </div>
 
       </div>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .why-us-card {
+            padding: 22px 18px !important;
+            border-radius: 18px !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }

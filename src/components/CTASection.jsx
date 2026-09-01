@@ -11,9 +11,9 @@ export default function CTASection({ onOpenEnroll }) {
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
           viewport={{ once: false, amount: 0.2 }}
           transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-          className="glass-card-static"
+          className="glass-card-static cta-card-box"
           style={{
-            padding: '64px 48px',
+            padding: '54px 40px',
             textAlign: 'center',
             borderRadius: '28px',
             border: '1.5px solid var(--card-border-glow)',
@@ -25,32 +25,32 @@ export default function CTASection({ onOpenEnroll }) {
           }}
         >
           {/* Tag */}
-          <div className="badge-pill" style={{ marginBottom: '22px' }}>
+          <div className="badge-pill" style={{ marginBottom: '20px' }}>
             <Sparkles size={14} color="var(--accent-secondary)" />
             <span>START YOUR FOREX JOURNEY</span>
           </div>
 
           {/* Headline */}
-          <h2 style={{ fontSize: 'clamp(2.2rem, 4vw, 3.4rem)', lineHeight: 1.2, marginBottom: '22px', fontWeight: 800 }}>
+          <h2 style={{ fontSize: 'clamp(1.85rem, 4.5vw, 3.2rem)', lineHeight: 1.2, marginBottom: '20px', fontWeight: 800, wordBreak: 'break-word' }}>
             Ready To Trade With <span className="gradient-text">Greater Clarity?</span>
           </h2>
 
           {/* Subheading */}
-          <p style={{ color: 'var(--text-muted)', fontSize: '1.08rem', maxWidth: '780px', margin: '0 auto 36px auto', lineHeight: 1.75 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: 'clamp(0.95rem, 2vw, 1.08rem)', maxWidth: '780px', margin: '0 auto 32px auto', lineHeight: 1.75 }}>
             Take the next step in your Forex journey with Aspire Forex Institute. Build your foundation, stay connected with the market, and access practical Forex guidance, trading signals, and market insights designed to help you trade with greater clarity and confidence.<br /><br />
             <span style={{ color: 'var(--text-primary)', fontWeight: 700 }}>Your journey starts with understanding. Your progress begins with consistency.</span>
           </p>
 
           {/* Buttons */}
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '18px', flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '14px', flexWrap: 'wrap' }}>
             <a
               href="https://whatsapp.com/channel/0029VbDnxUEAzNbqXUvZxo3f"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-primary"
               style={{
-                padding: '16px 42px',
-                fontSize: '1.05rem',
+                padding: '14px 36px',
+                fontSize: '0.98rem',
                 textDecoration: 'none',
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -59,13 +59,22 @@ export default function CTASection({ onOpenEnroll }) {
             >
               Join Today <ArrowRight size={18} />
             </a>
-            <a href="#contact" className="btn-secondary" style={{ padding: '16px 38px', fontSize: '1.05rem', textDecoration: 'none', display: 'inline-flex', alignItems: 'center' }}>
+            <a href="#contact" className="btn-secondary" style={{ padding: '14px 32px', fontSize: '0.98rem', textDecoration: 'none', display: 'inline-flex', alignItems: 'center' }}>
               Contact Support
             </a>
           </div>
 
         </motion.div>
       </div>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .cta-card-box {
+            padding: 36px 18px !important;
+            border-radius: 20px !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }

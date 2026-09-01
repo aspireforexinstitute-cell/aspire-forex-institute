@@ -68,12 +68,12 @@ export default function ContactSection() {
           </p>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', gap: '40px' }}>
+        <div className="contact-grid-layout">
           
           {/* Left Info Container */}
-          <div style={{ gridColumn: 'span 12' }} className="contact-left">
+          <div className="contact-left">
             <div
-              className="glass-card-static"
+              className="glass-card-static contact-info-card"
               style={{
                 padding: '36px',
                 height: 'fit-content',
@@ -97,9 +97,9 @@ export default function ContactSection() {
                     style={{
                       display: 'flex',
                       alignItems: 'center',
-                      gap: '18px',
+                      gap: '16px',
                       textDecoration: 'none',
-                      padding: '16px',
+                      padding: '14px 16px',
                       borderRadius: '16px',
                       background: 'var(--card-inner-bg)',
                       border: '1px solid var(--card-border)',
@@ -108,9 +108,9 @@ export default function ContactSection() {
                   >
                     <div
                       style={{
-                        width: '56px',
-                        height: '56px',
-                        borderRadius: '16px',
+                        width: '52px',
+                        height: '52px',
+                        borderRadius: '14px',
                         background: 'linear-gradient(135deg, #059669 0%, #34D399 100%)',
                         border: '2px solid rgba(255, 255, 255, 0.35)',
                         display: 'flex',
@@ -121,7 +121,7 @@ export default function ContactSection() {
                         flexShrink: 0
                       }}
                     >
-                      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.25))' }}>
+                      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.25))' }}>
                         <path
                           fillRule="evenodd"
                           clipRule="evenodd"
@@ -132,7 +132,7 @@ export default function ContactSection() {
                     </div>
                     <div>
                       <span style={{ fontSize: '0.82rem', color: 'var(--text-muted)', display: 'block', fontWeight: 600, marginBottom: '2px' }}>WhatsApp</span>
-                      <span style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--text-primary)', display: 'block' }}>
+                      <span style={{ fontSize: 'clamp(1.02rem, 2.5vw, 1.15rem)', fontWeight: 800, color: 'var(--text-primary)', display: 'block' }}>
                         +92 313 4494554
                       </span>
                     </div>
@@ -145,9 +145,9 @@ export default function ContactSection() {
                     style={{
                       display: 'flex',
                       alignItems: 'center',
-                      gap: '18px',
+                      gap: '16px',
                       textDecoration: 'none',
-                      padding: '16px',
+                      padding: '14px 16px',
                       borderRadius: '16px',
                       background: 'var(--card-inner-bg)',
                       border: '1px solid var(--card-border)',
@@ -157,9 +157,9 @@ export default function ContactSection() {
                   >
                     <div
                       style={{
-                        width: '56px',
-                        height: '56px',
-                        borderRadius: '16px',
+                        width: '52px',
+                        height: '52px',
+                        borderRadius: '14px',
                         background: 'linear-gradient(135deg, #0284C7 0%, #38BDF8 100%)',
                         border: '2px solid rgba(255, 255, 255, 0.35)',
                         display: 'flex',
@@ -170,11 +170,11 @@ export default function ContactSection() {
                         flexShrink: 0
                       }}
                     >
-                      <Mail size={26} strokeWidth={2.4} style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.25))' }} />
+                      <Mail size={24} strokeWidth={2.4} style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.25))' }} />
                     </div>
                     <div style={{ minWidth: 0, flex: 1 }}>
                       <span style={{ fontSize: '0.82rem', color: 'var(--text-muted)', display: 'block', fontWeight: 600, marginBottom: '2px' }}>Email</span>
-                      <span style={{ fontSize: '1.02rem', fontWeight: 800, color: 'var(--text-primary)', display: 'block', wordBreak: 'break-all' }}>
+                      <span style={{ fontSize: 'clamp(0.85rem, 2.2vw, 1.02rem)', fontWeight: 800, color: 'var(--text-primary)', display: 'block', wordBreak: 'break-all' }}>
                         aspireforexinstitute@gmail.com
                       </span>
                     </div>
@@ -185,9 +185,9 @@ export default function ContactSection() {
             </div>
           </div>
 
-          {/* Right Interactive Form Container */}
-          <div style={{ gridColumn: 'span 12' }} className="contact-right">
-            <div className="glass-card-static" style={{ padding: '36px', border: '1.5px solid var(--card-border-glow)', borderRadius: '24px' }}>
+          {/* Right Form Container */}
+          <div className="contact-right">
+            <div className="glass-card-static contact-form-card" style={{ padding: '36px', border: '1.5px solid var(--card-border-glow)', borderRadius: '24px' }}>
               
               {submitted ? (
                 <div style={{ textAlign: 'center', padding: '40px 20px' }}>
@@ -207,12 +207,12 @@ export default function ContactSection() {
                   </button>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
                   <h3 style={{ fontSize: '1.45rem', fontWeight: 800, marginBottom: '4px', fontFamily: 'Outfit, Space Grotesk, sans-serif' }}>
                     Send Us a Message
                   </h3>
 
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px' }}>
+                  <div className="contact-form-row">
                     <div>
                       <label style={{ fontSize: '0.85rem', color: 'var(--text-muted)', fontWeight: 600, display: 'block', marginBottom: '6px' }}>Full Name *</label>
                       <input
@@ -264,7 +264,7 @@ export default function ContactSection() {
                     type="submit"
                     disabled={isSubmitting}
                     className="btn-primary"
-                    style={{ padding: '16px', width: '100%', fontSize: '1rem', marginTop: '8px', cursor: isSubmitting ? 'not-allowed' : 'pointer', opacity: isSubmitting ? 0.75 : 1 }}
+                    style={{ padding: '15px', width: '100%', fontSize: '1rem', marginTop: '6px', cursor: isSubmitting ? 'not-allowed' : 'pointer', opacity: isSubmitting ? 0.75 : 1 }}
                   >
                     {isSubmitting ? 'Sending...' : 'Submit Inquiry'} <Send size={18} />
                   </button>
@@ -278,9 +278,26 @@ export default function ContactSection() {
       </div>
 
       <style>{`
+        .contact-grid-layout {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 28px;
+          width: 100%;
+        }
+
         @media (min-width: 1024px) {
-          .contact-left { grid-column: span 5 !important; }
-          .contact-right { grid-column: span 7 !important; }
+          .contact-grid-layout {
+            grid-template-columns: 5fr 7fr;
+            gap: 40px;
+          }
+        }
+
+        @media (max-width: 768px) {
+          .contact-info-card,
+          .contact-form-card {
+            padding: 20px 16px !important;
+            border-radius: 18px !important;
+          }
         }
       `}</style>
     </section>

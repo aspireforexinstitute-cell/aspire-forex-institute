@@ -73,7 +73,7 @@ export default function TestimonialsSection() {
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: false, amount: 0.2 }}
             transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-            className="glass-card-static"
+            className="glass-card-static testimonial-card-box"
             style={{
               padding: '28px',
               borderRadius: '24px',
@@ -83,37 +83,37 @@ export default function TestimonialsSection() {
             }}
           >
             {/* Top Header Bar inside the Single Box */}
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '20px', flexWrap: 'wrap', gap: '12px' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <div style={{ width: '42px', height: '42px', borderRadius: '12px', background: 'rgba(76, 201, 240, 0.15)', border: '1px solid rgba(76, 201, 240, 0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <MessageSquare size={22} color="var(--accent-secondary)" />
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '18px', flexWrap: 'wrap', gap: '10px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', minWidth: 0, flex: '1 1 220px' }}>
+                <div style={{ width: '40px', height: '40px', borderRadius: '12px', background: 'rgba(76, 201, 240, 0.15)', border: '1px solid rgba(76, 201, 240, 0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  <MessageSquare size={20} color="var(--accent-secondary)" />
                 </div>
-                <div>
-                  <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0, fontFamily: 'Outfit, Space Grotesk, sans-serif' }}>
+                <div style={{ minWidth: 0 }}>
+                  <h3 style={{ fontSize: 'clamp(1rem, 2.4vw, 1.2rem)', fontWeight: 800, color: 'var(--text-primary)', margin: 0, fontFamily: 'Outfit, Space Grotesk, sans-serif', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                     {feedbackImages[activeIdx].title}
                   </h3>
-                  <span style={{ fontSize: '0.92rem', color: 'var(--text-muted)', fontWeight: 600 }}>
+                  <span style={{ fontSize: '0.82rem', color: 'var(--text-muted)', fontWeight: 600, display: 'block', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                     {feedbackImages[activeIdx].subtitle}
                   </span>
                 </div>
               </div>
 
-              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
                 <span
                   style={{
                     display: 'inline-flex',
                     alignItems: 'center',
-                    gap: '6px',
-                    padding: '7px 16px',
+                    gap: '4px',
+                    padding: '5px 12px',
                     borderRadius: '100px',
                     background: 'rgba(46, 212, 122, 0.12)',
                     border: '1.5px solid rgba(46, 212, 122, 0.4)',
                     color: '#2ED47A',
-                    fontSize: '0.82rem',
+                    fontSize: '0.75rem',
                     fontWeight: 800
                   }}
                 >
-                  <ShieldCheck size={16} /> Verified Chat
+                  <ShieldCheck size={14} /> Verified
                 </span>
 
                 <button
@@ -122,19 +122,19 @@ export default function TestimonialsSection() {
                   style={{
                     display: 'inline-flex',
                     alignItems: 'center',
-                    gap: '6px',
-                    padding: '7px 16px',
-                    borderRadius: '12px',
+                    gap: '4px',
+                    padding: '5px 12px',
+                    borderRadius: '10px',
                     background: 'var(--card-inner-bg)',
                     border: '1px solid var(--card-border)',
                     color: 'var(--text-primary)',
-                    fontSize: '0.82rem',
+                    fontSize: '0.75rem',
                     fontWeight: 700,
                     cursor: 'pointer',
                     transition: 'all 0.2s ease'
                   }}
                 >
-                  <Maximize2 size={15} /> Full View
+                  <Maximize2 size={13} /> Full View
                 </button>
               </div>
             </div>
@@ -143,18 +143,18 @@ export default function TestimonialsSection() {
             <div
               onClick={() => setLightboxImg(feedbackImages[activeIdx].src)}
               style={{
-                borderRadius: '18px',
+                borderRadius: '16px',
                 overflow: 'hidden',
                 position: 'relative',
                 background: 'var(--card-inner-bg)',
                 border: '1px solid var(--card-border)',
                 cursor: 'pointer',
                 aspectRatio: '1 / 1',
-                maxHeight: '580px',
+                maxHeight: '560px',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                marginBottom: '20px'
+                marginBottom: '16px'
               }}
             >
               <AnimatePresence mode="wait">
@@ -179,23 +179,23 @@ export default function TestimonialsSection() {
               <div
                 style={{
                   position: 'absolute',
-                  bottom: '16px',
-                  right: '16px',
+                  bottom: '12px',
+                  right: '12px',
                   background: 'rgba(5, 8, 22, 0.85)',
                   backdropFilter: 'blur(8px)',
                   border: '1px solid rgba(255, 255, 255, 0.25)',
                   color: '#FFFFFF',
-                  padding: '8px 18px',
+                  padding: '6px 14px',
                   borderRadius: '100px',
-                  fontSize: '0.82rem',
+                  fontSize: '0.75rem',
                   fontWeight: 700,
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '6px',
+                  gap: '5px',
                   pointerEvents: 'none'
                 }}
               >
-                <Maximize2 size={14} /> Click to Zoom
+                <Maximize2 size={12} /> Tap to Zoom
               </div>
             </div>
 
@@ -206,20 +206,20 @@ export default function TestimonialsSection() {
                 alignItems: 'center',
                 justifyContent: 'space-between',
                 flexWrap: 'wrap',
-                gap: '16px',
-                paddingTop: '16px',
+                gap: '12px',
+                paddingTop: '14px',
                 borderTop: '1px solid var(--card-border)'
               }}
             >
               {/* Prev / Next Buttons */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <button
                   onClick={prevSlide}
                   aria-label="Previous Review"
                   style={{
-                    width: '44px',
-                    height: '44px',
-                    borderRadius: '12px',
+                    width: '38px',
+                    height: '38px',
+                    borderRadius: '10px',
                     background: 'var(--card-inner-bg)',
                     border: '1px solid var(--card-border)',
                     color: 'var(--text-primary)',
@@ -230,16 +230,16 @@ export default function TestimonialsSection() {
                     transition: 'all 0.2s ease'
                   }}
                 >
-                  <ChevronLeft size={22} />
+                  <ChevronLeft size={20} />
                 </button>
 
                 <button
                   onClick={nextSlide}
                   aria-label="Next Review"
                   style={{
-                    width: '44px',
-                    height: '44px',
-                    borderRadius: '12px',
+                    width: '38px',
+                    height: '38px',
+                    borderRadius: '10px',
                     background: 'var(--card-inner-bg)',
                     border: '1px solid var(--card-border)',
                     color: 'var(--text-primary)',
@@ -250,26 +250,26 @@ export default function TestimonialsSection() {
                     transition: 'all 0.2s ease'
                   }}
                 >
-                  <ChevronRight size={22} />
+                  <ChevronRight size={20} />
                 </button>
               </div>
 
               {/* 4 Mini Thumbnails inside the Single Box */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
                 {feedbackImages.map((img, idx) => (
                   <div
                     key={img.id}
                     onClick={() => setActiveIdx(idx)}
                     style={{
-                      width: '60px',
-                      height: '60px',
-                      borderRadius: '12px',
+                      width: '46px',
+                      height: '46px',
+                      borderRadius: '10px',
                       overflow: 'hidden',
                       cursor: 'pointer',
-                      border: activeIdx === idx ? '2.5px solid var(--accent-secondary)' : '1.5px solid var(--card-border)',
-                      boxShadow: activeIdx === idx ? '0 0 12px var(--accent-glow)' : 'none',
+                      border: activeIdx === idx ? '2px solid var(--accent-secondary)' : '1px solid var(--card-border)',
+                      boxShadow: activeIdx === idx ? '0 0 10px var(--accent-glow)' : 'none',
                       opacity: activeIdx === idx ? 1 : 0.6,
-                      transform: activeIdx === idx ? 'scale(1.08)' : 'scale(1)',
+                      transform: activeIdx === idx ? 'scale(1.05)' : 'scale(1)',
                       transition: 'all 0.25s ease'
                     }}
                   >
@@ -283,8 +283,8 @@ export default function TestimonialsSection() {
               </div>
 
               {/* Page Counter */}
-              <span style={{ fontSize: '0.95rem', fontWeight: 800, color: 'var(--text-primary)', fontFamily: 'Space Grotesk, sans-serif' }}>
-                Proof {activeIdx + 1} / {feedbackImages.length}
+              <span style={{ fontSize: '0.85rem', fontWeight: 800, color: 'var(--text-primary)', fontFamily: 'Space Grotesk, sans-serif' }}>
+                {activeIdx + 1} / {feedbackImages.length}
               </span>
             </div>
 
@@ -292,6 +292,15 @@ export default function TestimonialsSection() {
         </div>
 
       </div>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .testimonial-card-box {
+            padding: 16px 12px !important;
+            border-radius: 18px !important;
+          }
+        }
+      `}</style>
 
       {/* Full-screen Lightbox Modal for HD Inspection */}
       <AnimatePresence>

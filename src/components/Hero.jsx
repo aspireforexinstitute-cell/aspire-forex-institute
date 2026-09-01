@@ -107,10 +107,10 @@ export default function Hero({ onOpenEnroll, onOpenDemo }) {
       </div>
 
       <div className="container-custom" style={{ position: 'relative', zIndex: 2, width: '100%' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', gap: '40px', alignItems: 'center' }}>
+        <div className="hero-grid-layout">
           
           {/* Left Hero Content */}
-          <div style={{ gridColumn: 'span 12' }} className="hero-left-col">
+          <div className="hero-left-col">
             
             {/* Main Headline Area with Clean Typography & Unique Opening Animation */}
             <div className="hero-headline-container" style={{ position: 'relative', marginBottom: '22px' }}>
@@ -124,8 +124,10 @@ export default function Hero({ onOpenEnroll, onOpenDemo }) {
 
               {/* Main Headline: Aspire Forex Institute with Proper Word Spacing */}
               <h1 className="hero-main-title">
-                <span className={`title-word title-aspire ${animateIn ? 'animate-active' : ''}`}>Aspire</span>
-                <span className={`title-word title-forex ${animateIn ? 'animate-active' : ''}`}>Forex</span>
+                <span className="hero-title-top-row">
+                  <span className={`title-word title-aspire ${animateIn ? 'animate-active' : ''}`}>Aspire</span>
+                  <span className={`title-word title-forex ${animateIn ? 'animate-active' : ''}`}>Forex</span>
+                </span>
                 <span className={`title-word title-institute gradient-text ${animateIn ? 'animate-active' : ''}`}>Institute</span>
               </h1>
             </div>
@@ -188,38 +190,28 @@ export default function Hero({ onOpenEnroll, onOpenDemo }) {
           </div>
 
           {/* Right Interactive Dashboard Mockup - Always Rich Dark Terminal Style */}
-          <div style={{ gridColumn: 'span 12' }} className="hero-right-col">
-            <div
-              style={{
-                padding: '28px',
-                position: 'relative',
-                borderRadius: '24px',
-                background: 'linear-gradient(135deg, #0D1327 0%, #050816 100%)',
-                border: '1px solid rgba(76, 201, 240, 0.35)',
-                boxShadow: '0 30px 60px -15px rgba(0, 0, 0, 0.65)',
-                color: '#FFFFFF'
-              }}
-            >
+          <div className="hero-right-col">
+            <div className="hero-terminal-card">
               {/* Top Dashboard Bar */}
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '20px', flexWrap: 'wrap', gap: '12px' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                  <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#2ED47A', boxShadow: '0 0 10px #2ED47A' }} />
-                  <span style={{ fontWeight: 700, fontSize: '1rem', color: '#FFFFFF' }}>Live Institutional Terminal</span>
-                  <span style={{ fontSize: '0.8rem', background: 'rgba(46,212,122,0.2)', color: '#2ED47A', padding: '4px 12px', borderRadius: '6px', fontWeight: 800 }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px', flexWrap: 'wrap', gap: '10px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', minWidth: 0 }}>
+                  <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#2ED47A', boxShadow: '0 0 8px #2ED47A', flexShrink: 0 }} />
+                  <span style={{ fontWeight: 700, fontSize: 'clamp(0.85rem, 2.5vw, 1rem)', color: '#FFFFFF', whiteSpace: 'nowrap' }}>Live Institutional Terminal</span>
+                  <span style={{ fontSize: '0.72rem', background: 'rgba(46,212,122,0.2)', color: '#2ED47A', padding: '3px 8px', borderRadius: '6px', fontWeight: 800 }}>
                     ACTIVE
                   </span>
                 </div>
 
                 {/* Asset Tabs */}
-                <div style={{ display: 'flex', gap: '6px', background: 'rgba(255,255,255,0.06)', padding: '4px', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.1)' }}>
+                <div style={{ display: 'flex', gap: '4px', background: 'rgba(255,255,255,0.06)', padding: '3px', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.1)', flexWrap: 'wrap' }}>
                   {['EURUSD', 'XAUUSD', 'US30', 'BTCUSD'].map((pair) => (
                     <button
                       key={pair}
                       onClick={() => setActiveTab(pair)}
                       style={{
-                        padding: '6px 12px',
-                        borderRadius: '8px',
-                        fontSize: '0.75rem',
+                        padding: '5px 10px',
+                        borderRadius: '7px',
+                        fontSize: 'clamp(0.68rem, 2vw, 0.75rem)',
                         fontWeight: 700,
                         border: 'none',
                         background: activeTab === pair ? '#4CC9F0' : 'transparent',
@@ -235,123 +227,107 @@ export default function Hero({ onOpenEnroll, onOpenDemo }) {
               </div>
 
               {/* Ticker & Price Bar */}
-              <div style={{ display: 'flex', alignItems: 'baseline', gap: '16px', marginBottom: '24px' }}>
-                <span style={{ fontSize: '2.2rem', fontWeight: 800, fontFamily: 'Space Grotesk, sans-serif', color: '#FFFFFF' }}>
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: '12px', marginBottom: '18px', flexWrap: 'wrap' }}>
+                <span style={{ fontSize: 'clamp(1.8rem, 5vw, 2.2rem)', fontWeight: 800, fontFamily: 'Space Grotesk, sans-serif', color: '#FFFFFF' }}>
                   {activeTab === 'EURUSD' ? livePrice.toFixed(4) : activeTab === 'XAUUSD' ? '2,428.50' : activeTab === 'US30' ? '39,450.0' : '65,240.0'}
                 </span>
-                <span style={{ fontSize: '0.95rem', color: '#2ED47A', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '4px' }}>
-                  <TrendingUp size={16} /> +1.84% (Bullish Order Block)
+                <span style={{ fontSize: 'clamp(0.82rem, 2.2vw, 0.95rem)', color: '#2ED47A', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '4px' }}>
+                  <TrendingUp size={15} /> +1.84% (Bullish Order Block)
                 </span>
               </div>
 
               {/* Dynamic Animated SVG Candlestick Chart - Crisp Solid Dark Container */}
               <div
                 style={{
-                  height: '220px',
+                  height: '210px',
                   width: '100%',
                   background: '#050816',
                   borderRadius: '16px',
                   border: '1px solid rgba(255, 255, 255, 0.1)',
-                  padding: '16px',
+                  padding: '12px',
                   position: 'relative',
                   overflow: 'hidden',
-                  marginBottom: '24px'
+                  marginBottom: '16px'
                 }}
               >
+                {/* Signal Callout Badge */}
+                <div className="hero-chart-badge">
+                  <Activity size={12} style={{ flexShrink: 0 }} />
+                  <span>Buy Signal Confirmed: SMC Liquidity</span>
+                </div>
+
                 {/* SVG Candlestick Graphic */}
-                <svg width="100%" height="100%" viewBox="0 0 500 180" preserveAspectRatio="none">
+                <svg width="100%" height="100%" viewBox="0 0 460 170" preserveAspectRatio="none" style={{ display: 'block', width: '100%', height: '100%' }}>
                   {/* Grid Lines */}
-                  <line x1="0" y1="40" x2="500" y2="40" stroke="rgba(255,255,255,0.08)" strokeDasharray="4 4" />
-                  <line x1="0" y1="90" x2="500" y2="90" stroke="rgba(255,255,255,0.08)" strokeDasharray="4 4" />
-                  <line x1="0" y1="140" x2="500" y2="140" stroke="rgba(255,255,255,0.08)" strokeDasharray="4 4" />
+                  <line x1="0" y1="40" x2="460" y2="40" stroke="rgba(255,255,255,0.08)" strokeDasharray="4 4" />
+                  <line x1="0" y1="85" x2="460" y2="85" stroke="rgba(255,255,255,0.08)" strokeDasharray="4 4" />
+                  <line x1="0" y1="130" x2="460" y2="130" stroke="rgba(255,255,255,0.08)" strokeDasharray="4 4" />
 
                   {/* Candlesticks */}
                   {/* Candle 1 (Green) */}
-                  <line x1="30" y1="110" x2="30" y2="150" stroke="#2ED47A" strokeWidth="2" />
-                  <rect x="24" y="120" width="12" height="25" fill="#2ED47A" rx="2" />
+                  <line x1="25" y1="100" x2="25" y2="140" stroke="#2ED47A" strokeWidth="2" />
+                  <rect x="20" y="110" width="10" height="22" fill="#2ED47A" rx="2" />
 
                   {/* Candle 2 (Red) */}
-                  <line x1="70" y1="100" x2="70" y2="145" stroke="#FF5252" strokeWidth="2" />
-                  <rect x="64" y="110" width="12" height="20" fill="#FF5252" rx="2" />
+                  <line x1="65" y1="90" x2="65" y2="135" stroke="#FF5252" strokeWidth="2" />
+                  <rect x="60" y="100" width="10" height="18" fill="#FF5252" rx="2" />
 
                   {/* Candle 3 (Green) */}
-                  <line x1="110" y1="80" x2="110" y2="135" stroke="#2ED47A" strokeWidth="2" />
-                  <rect x="104" y="90" width="12" height="35" fill="#2ED47A" rx="2" />
+                  <line x1="105" y1="75" x2="105" y2="125" stroke="#2ED47A" strokeWidth="2" />
+                  <rect x="100" y="85" width="10" height="30" fill="#2ED47A" rx="2" />
 
                   {/* Candle 4 (Liquidity Sweep Green) */}
-                  <line x1="150" y1="60" x2="150" y2="120" stroke="#2ED47A" strokeWidth="2" />
-                  <rect x="144" y="70" width="12" height="40" fill="#2ED47A" rx="2" />
+                  <line x1="145" y1="55" x2="145" y2="110" stroke="#2ED47A" strokeWidth="2" />
+                  <rect x="140" y="65" width="10" height="35" fill="#2ED47A" rx="2" />
 
                   {/* Candle 5 (Red Pullback) */}
-                  <line x1="190" y1="75" x2="190" y2="115" stroke="#FF5252" strokeWidth="2" />
-                  <rect x="184" y="80" width="12" height="25" fill="#FF5252" rx="2" />
+                  <line x1="185" y1="70" x2="185" y2="105" stroke="#FF5252" strokeWidth="2" />
+                  <rect x="180" y="75" width="10" height="20" fill="#FF5252" rx="2" />
 
                   {/* Candle 6 (Bullish Imbalance Breakout) */}
-                  <line x1="230" y1="35" x2="230" y2="95" stroke="#2ED47A" strokeWidth="2" />
-                  <rect x="224" y="45" width="12" height="40" fill="#2ED47A" rx="2" />
+                  <line x1="225" y1="35" x2="225" y2="90" stroke="#2ED47A" strokeWidth="2" />
+                  <rect x="220" y="45" width="10" height="35" fill="#2ED47A" rx="2" />
 
                   {/* Candle 7 (Green Strong) */}
-                  <line x1="270" y1="20" x2="270" y2="70" stroke="#2ED47A" strokeWidth="2" />
-                  <rect x="264" y="25" width="12" height="35" fill="#2ED47A" rx="2" />
+                  <line x1="265" y1="20" x2="265" y2="65" stroke="#2ED47A" strokeWidth="2" />
+                  <rect x="260" y="25" width="10" height="30" fill="#2ED47A" rx="2" />
 
                   {/* Candle 8 (Pullback to Order Block) */}
-                  <line x1="310" y1="40" x2="310" y2="85" stroke="#FF5252" strokeWidth="2" />
-                  <rect x="304" y="45" width="12" height="30" fill="#FF5252" rx="2" />
+                  <line x1="305" y1="35" x2="305" y2="80" stroke="#FF5252" strokeWidth="2" />
+                  <rect x="300" y="40" width="10" height="25" fill="#FF5252" rx="2" />
 
                   {/* Candle 9 (Huge Surge) */}
-                  <line x1="350" y1="15" x2="350" y2="65" stroke="#2ED47A" strokeWidth="2" />
-                  <rect x="344" y="20" width="12" height="38" fill="#2ED47A" rx="2" />
+                  <line x1="345" y1="15" x2="345" y2="60" stroke="#2ED47A" strokeWidth="2" />
+                  <rect x="340" y="20" width="10" height="32" fill="#2ED47A" rx="2" />
 
                   {/* Candle 10 (Breakout High) */}
-                  <line x1="390" y1="10" x2="390" y2="50" stroke="#2ED47A" strokeWidth="2" />
-                  <rect x="384" y="12" width="12" height="30" fill="#2ED47A" rx="2" />
+                  <line x1="385" y1="10" x2="385" y2="48" stroke="#2ED47A" strokeWidth="2" />
+                  <rect x="380" y="12" width="10" height="26" fill="#2ED47A" rx="2" />
 
                   {/* Smooth Trend Curve Line */}
                   <path
-                    d="M 30 130 Q 110 95, 150 85 T 230 55 T 310 50 T 420 20"
+                    d="M 25 120 Q 105 85, 145 75 T 225 45 T 305 40 T 395 18"
                     fill="none"
                     stroke="#4CC9F0"
                     strokeWidth="3"
                     strokeLinecap="round"
                   />
                 </svg>
-
-                {/* Signal Callout Badge */}
-                <div
-                  style={{
-                    position: 'absolute',
-                    top: '20px',
-                    right: '20px',
-                    background: 'rgba(46, 212, 122, 0.2)',
-                    border: '1px solid #2ED47A',
-                    padding: '8px 14px',
-                    borderRadius: '10px',
-                    fontSize: '0.75rem',
-                    fontWeight: 700,
-                    color: '#2ED47A',
-                    backdropFilter: 'blur(10px)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '6px'
-                  }}
-                >
-                  <Activity size={14} /> Buy Signal Confirmed: SMC Liquidity Grab
-                </div>
               </div>
 
               {/* Bottom Stat Cards Grid */}
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '14px' }}>
-                <div style={{ background: '#090D1A', padding: '16px', borderRadius: '14px', border: '1px solid rgba(255, 255, 255, 0.1)' }}>
-                  <span style={{ fontSize: '0.82rem', color: '#94A3B8', display: 'block', marginBottom: '5px', fontWeight: 600 }}>Win Rate</span>
-                  <span style={{ fontSize: '1.3rem', fontWeight: 800, color: '#2ED47A' }}>94.8%</span>
+              <div className="hero-stats-grid">
+                <div className="hero-stat-box">
+                  <span className="hero-stat-label">Win Rate</span>
+                  <span className="hero-stat-value" style={{ color: '#2ED47A' }}>94.8%</span>
                 </div>
-                <div style={{ background: '#090D1A', padding: '16px', borderRadius: '14px', border: '1px solid rgba(255, 255, 255, 0.1)' }}>
-                  <span style={{ fontSize: '0.82rem', color: '#94A3B8', display: 'block', marginBottom: '5px', fontWeight: 600 }}>Avg Risk/Reward</span>
-                  <span style={{ fontSize: '1.3rem', fontWeight: 800, color: '#4CC9F0' }}>1 : 3.8</span>
+                <div className="hero-stat-box">
+                  <span className="hero-stat-label">Avg Risk/Reward</span>
+                  <span className="hero-stat-value" style={{ color: '#4CC9F0' }}>1 : 3.8</span>
                 </div>
-                <div style={{ background: '#090D1A', padding: '16px', borderRadius: '14px', border: '1px solid rgba(255, 255, 255, 0.1)' }}>
-                  <span style={{ fontSize: '0.82rem', color: '#94A3B8', display: 'block', marginBottom: '5px', fontWeight: 600 }}>Funded Traders</span>
-                  <span style={{ fontSize: '1.3rem', fontWeight: 800, color: '#EAB308' }}>1,420+</span>
+                <div className="hero-stat-box">
+                  <span className="hero-stat-label">Funded Traders</span>
+                  <span className="hero-stat-value" style={{ color: '#EAB308' }}>1,420+</span>
                 </div>
               </div>
 
@@ -431,6 +407,12 @@ export default function Hero({ onOpenEnroll, onOpenDemo }) {
           gap: 12px 18px;
         }
 
+        .hero-title-top-row {
+          display: inline-flex;
+          align-items: baseline;
+          gap: 12px 18px;
+        }
+
         /* Staggered Word Entrance Animations */
         .title-word {
           display: inline-block;
@@ -491,25 +473,130 @@ export default function Hero({ onOpenEnroll, onOpenDemo }) {
           text-shadow: 0 0 16px rgba(2, 132, 199, 0.3);
         }
 
+        /* Hero Chart Badge & Stats Styling */
+        .hero-chart-badge {
+          position: absolute;
+          top: 14px;
+          right: 14px;
+          background: rgba(46, 212, 122, 0.2);
+          border: 1px solid #2ED47A;
+          padding: 5px 10px;
+          border-radius: 8px;
+          font-size: 0.72rem;
+          font-weight: 700;
+          color: #2ED47A;
+          backdrop-filter: blur(10px);
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          z-index: 2;
+          max-width: calc(100% - 28px);
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        .hero-stat-box {
+          background: #090D1A;
+          padding: 14px 12px;
+          border-radius: 14px;
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          display: flex;
+          flex-direction: column;
+          min-width: 0;
+          text-align: center;
+          align-items: center;
+        }
+
+        .hero-stat-label {
+          font-size: 0.78rem;
+          color: #94A3B8;
+          display: block;
+          margin-bottom: 4px;
+          font-weight: 600;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          width: 100%;
+        }
+
+        .hero-stat-value {
+          font-size: clamp(1.1rem, 2.2vw, 1.35rem);
+          font-weight: 800;
+          white-space: nowrap;
+        }
+
+        .hero-grid-layout {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 36px;
+          align-items: center;
+          width: 100%;
+        }
+
         @media (min-width: 1024px) {
-          .hero-left-col { grid-column: span 6 !important; }
-          .hero-right-col { grid-column: span 6 !important; }
+          .hero-grid-layout {
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+          }
         }
 
         @media (max-width: 768px) {
           .hero-main-title {
-            font-size: clamp(2.7rem, 9.5vw, 3.5rem) !important;
-            line-height: 1.12 !important;
-            gap: 6px 14px !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            gap: 4px !important;
+            font-size: clamp(2rem, 7.8vw, 2.8rem) !important;
+            line-height: 1.14 !important;
+            width: 100% !important;
+          }
+          .hero-title-top-row {
+            display: flex !important;
+            align-items: baseline !important;
+            gap: 8px !important;
+            flex-wrap: wrap !important;
+            width: 100% !important;
           }
           .welcome-small-text {
-            font-size: 1.05rem !important;
+            font-size: 0.98rem !important;
+          }
+          .hero-chart-badge {
+            top: 10px !important;
+            right: 10px !important;
+            padding: 3px 8px !important;
+            font-size: 0.65rem !important;
+            max-width: calc(100% - 20px) !important;
+          }
+          .hero-stat-box {
+            padding: 10px 4px !important;
+            border-radius: 10px !important;
+          }
+          .hero-stat-label {
+            font-size: 0.68rem !important;
+            letter-spacing: -0.01em !important;
+          }
+          .hero-stat-value {
+            font-size: clamp(0.95rem, 3.4vw, 1.15rem) !important;
           }
         }
 
         @media (max-width: 480px) {
           .hero-main-title {
-            font-size: clamp(2.4rem, 9vw, 3rem) !important;
+            font-size: clamp(1.85rem, 8vw, 2.35rem) !important;
+          }
+          .hero-chart-badge {
+            font-size: 0.62rem !important;
+            padding: 3px 6px !important;
+          }
+          .hero-stat-box {
+            padding: 8px 3px !important;
+          }
+          .hero-stat-label {
+            font-size: 0.62rem !important;
+          }
+          .hero-stat-value {
+            font-size: 0.92rem !important;
           }
         }
       `}</style>

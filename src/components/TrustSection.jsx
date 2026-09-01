@@ -145,13 +145,7 @@ export default function TrustSection() {
             </span>
           </div>
 
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-              gap: '22px'
-            }}
-          >
+          <div className="trust-stats-grid">
             {stats.map((stat, idx) => {
               const Icon = stat.icon;
               return (
@@ -168,21 +162,22 @@ export default function TrustSection() {
                   style={{
                     display: 'flex',
                     alignItems: 'center',
-                    gap: '16px',
-                    padding: '22px 20px',
+                    gap: '14px',
+                    padding: 'clamp(14px, 2vw, 22px) clamp(12px, 2vw, 20px)',
                     borderRadius: '16px',
                     background: 'var(--card-inner-bg)',
                     border: '1px solid var(--card-border)',
                     boxShadow: '0 4px 14px rgba(0, 0, 0, 0.06)',
                     cursor: 'default',
-                    transition: 'border-color 0.25s ease, box-shadow 0.25s ease'
+                    transition: 'border-color 0.25s ease, box-shadow 0.25s ease',
+                    minWidth: 0
                   }}
                 >
                   <div
                     style={{
-                      width: '54px',
-                      height: '54px',
-                      borderRadius: '14px',
+                      width: '46px',
+                      height: '46px',
+                      borderRadius: '12px',
                       background: stat.gradient,
                       border: '2px solid rgba(255, 255, 255, 0.3)',
                       display: 'flex',
@@ -193,18 +188,18 @@ export default function TrustSection() {
                       boxShadow: `0 8px 20px -3px ${stat.glow}, inset 0 2px 4px rgba(255, 255, 255, 0.35)`
                     }}
                   >
-                    <Icon size={26} strokeWidth={2.4} style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.25))' }} />
+                    <Icon size={22} strokeWidth={2.4} style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.25))' }} />
                   </div>
-                  <div style={{ overflow: 'hidden' }}>
+                  <div style={{ overflow: 'hidden', minWidth: 0 }}>
                     <div
                       style={{
-                        fontSize: 'clamp(1.55rem, 2.2vw, 1.85rem)',
+                        fontSize: 'clamp(1.25rem, 2.2vw, 1.85rem)',
                         fontWeight: 800,
                         fontFamily: 'Outfit, Space Grotesk, sans-serif',
                         color: 'var(--text-primary)',
                         lineHeight: 1.15,
                         letterSpacing: '-0.02em',
-                        marginBottom: '4px',
+                        marginBottom: '2px',
                         whiteSpace: 'nowrap'
                       }}
                     >
@@ -219,11 +214,13 @@ export default function TrustSection() {
                     </div>
                     <div
                       style={{
-                        fontSize: '0.85rem',
+                        fontSize: 'clamp(0.72rem, 1.8vw, 0.85rem)',
                         color: 'var(--text-muted)',
                         fontWeight: 600,
                         letterSpacing: '0.01em',
-                        whiteSpace: 'nowrap'
+                        whiteSpace: 'nowrap',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis'
                       }}
                     >
                       {stat.label}
